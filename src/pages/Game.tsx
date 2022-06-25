@@ -29,7 +29,12 @@ export function Game() {
   return (
     <>
       <Row className="mt-5">
-        <Col className="d-flex justify-content-center gap-3">
+        <Col className="d-flex justify-content-center">
+          <h1>Choose your weapon</h1>
+        </Col>
+        </Row>
+        <Row>
+        <Col className="d-flex justify-content-center gap-3 mt-3">
           {gameChoices.map((choice) => (
             <ChoiceButton
               key={choice.id}
