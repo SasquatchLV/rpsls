@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "name": "Rock",
+    "img": "/imgs/rock.png"
+  },
+  {
+    "id": 2,
+    "name": "Paper",
+    "img": "/imgs/paper.png"
+  },
+  {
+    "id": 3,
+    "name": "Scissors",
+    "img": "/imgs/scissors.png"
+  },
+  {
+    "id": 4,
+    "name": "Lizard",
+    "img": "/imgs/lizard.png"
+  },
+  {
+    "id": 5,
+    "name": "Spock",
+    "img": "/imgs/spock.png"
+  }
+]
