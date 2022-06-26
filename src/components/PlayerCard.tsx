@@ -16,7 +16,7 @@ const PlayerCard = (props: PlayerCardProps) => {
         <strong className="me-auto">{props.name}</strong>
       </Toast.Header>
       <Toast.Body>
-        <h4>Health: {props.score}</h4>
+        <h4>Health: {props.score === 0 ? "Dead" : props.score}</h4>
         <ProgressBar
           variant="danger"
           animated

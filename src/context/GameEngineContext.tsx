@@ -25,6 +25,7 @@ type GameEngineContext = {
   computerHealth: number
   highScore: number
   deaths: number
+  takingDamage: boolean
 }
 
 export type ChoiceProps = {
@@ -46,6 +47,7 @@ export function GameEngineProvider({ children }: GameEngineProviderProps) {
   const [gameResult, setGameResult] = useState<string | null>(null)
   const [playerHealth, setPlayerHealth] = useState(5)
   const [computerHealth, setComputerHealth] = useState(5)
+  const [takingDamage, setTakingDamage] = useState(false)
   const [highScore, setHighScore] = useLocalStorage("highScore", 0)
   const [deaths, setDeaths] = useLocalStorage("deaths", 0)
 
@@ -86,6 +88,7 @@ export function GameEngineProvider({ children }: GameEngineProviderProps) {
       setComputerHealth(computerHealth - 1)
       return "You win!"
     }
+    showSplash()
     setPlayerHealth(playerHealth - 1)
     return "You lose!"
   }
@@ -120,6 +123,13 @@ export function GameEngineProvider({ children }: GameEngineProviderProps) {
     }, 2000)
   }
 
+  const showSplash = () => {
+    setTakingDamage(true)
+    setTimeout(() => {
+      setTakingDamage(false)
+    }, 2000)
+  }
+
   return (
     <GameEngineContext.Provider
       value={{
@@ -134,6 +144,7 @@ export function GameEngineProvider({ children }: GameEngineProviderProps) {
         computerHealth,
         highScore,
         deaths,
+        takingDamage,
       }}
     >
       {children}

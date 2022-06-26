@@ -19,6 +19,7 @@ export function Game() {
     highScore,
     deaths,
     resetGame,
+    takingDamage,
   } = useGameEngine()
 
   return (
@@ -58,6 +59,16 @@ export function Game() {
             }}
             transition={{ ease: "easeInOut", duration: 1 }}
           >
+            {takingDamage && (
+              <motion.div
+                className="splash"
+                animate={{
+                  scale: [1, 1.2, 1, 1],
+                  opacity: [1, 1, 0, 0],
+                }}
+                transition={{ ease: "easeInOut", duration: 2 }}
+              ></motion.div>
+            )}
             <Row xs={3} className="g-3 mt-2 align-items-start">
               <Col className="d-flex justify-content-center flex-column align-items-center">
                 <PlayerCard
@@ -128,6 +139,7 @@ export function Game() {
           </motion.div>
         </>
       )}
+
       <motion.div
         animate={{ y: [-1000, 0] }}
         transition={{ ease: "easeOut", duration: 0.6, delay: 1 }}
