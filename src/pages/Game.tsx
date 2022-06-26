@@ -5,15 +5,7 @@ import Spinner from "react-bootstrap/Spinner"
 import { useGameEngine } from "../context/GameEngineContext"
 import ChoiceButton from "../components/ChoiceButton"
 import PlayerCard from "../components/PlayerCard"
-
-const pcLoadingMessages = [
-  "Hmmmm, a tough one, working on it...",
-  "I'm still learning how to play this game...",
-  "I have a lot of free time, so beating me won't be easy...",
-  "Easy as 1,2,3",
-  "Never gonna give you up, never gonna let you down",
-  "Tell me mortal, can you beat this?",
-]
+import randomMessage from "../utilities/randomMessage"
 
 export function Game() {
   const {
@@ -21,19 +13,21 @@ export function Game() {
     computerChoice,
     gameResult,
     isPlaying,
-    playerScore,
-    computerScore,
+    playerHealth,
+    computerHealth,
     highScore,
+    deaths,
+    resetGame,
   } = useGameEngine()
 
   return (
     <>
       <Row className="mt-5">
         <Col className="d-flex justify-content-center">
-          <h1>Choose your weapon</h1>
+          <h1 className="text-white">Choose your weapon</h1>
         </Col>
-        </Row>
-        <Row>
+      </Row>
+      <Row>
         <Col className="d-flex justify-content-center gap-3 mt-3">
           {gameChoices.map((choice) => (
             <ChoiceButton
@@ -52,7 +46,7 @@ export function Game() {
               img="/imgs/gamer.png"
               name="Pro Player"
               pick={playerChoice.name}
-              score={playerScore}
+              score={playerHealth}
             />
             <ChoiceCard {...playerChoice} />
           </Col>
@@ -75,24 +69,14 @@ export function Game() {
                     width={200}
                   ></img>
                 ) : (
-                  <img
-                    src="/imgs/draw.png"
-                    className="img-fluid"
-                    width={200}
-                  ></img>
+                  <h1 className="text-white">DRAW</h1>
                 )}
               </div>
             )}
           </Col>
           {isPlaying && (
             <Col className="d-flex justify-content-center align-items-center flex-column gap-3">
-              <span className="fs-2">
-                {
-                  pcLoadingMessages[
-                    Math.floor(Math.random() * pcLoadingMessages.length)
-                  ]
-                }
-              </span>
+              <span className="fs-2 text-white">{randomMessage()}</span>
               <Spinner animation="border" variant="danger" />
               <img
                 src="/imgs/enemy.png"
@@ -107,7 +91,7 @@ export function Game() {
                 img="/imgs/enemy.png"
                 name="Evil Enemy"
                 pick={computerChoice.name}
-                score={computerScore}
+                score={computerHealth}
               />
               <ChoiceCard {...computerChoice} />
             </Col>
@@ -115,8 +99,18 @@ export function Game() {
         </Row>
       )}
       <Row className="mt-5">
-        <Col className="d-flex justify-content-center">
-          <h3>Your best score: {highScore}</h3>
+        <Col className="d-flex align-items-center flex-column">
+          {playerChoice && (
+            <Button
+              onClick={() => resetGame()}
+              variant="outline-danger"
+              className="mt-3 mb-3"
+            >
+              Restart
+            </Button>
+          )}
+          <h3 className="text-white">Your victories: {highScore}</h3>
+          <h3 className="text-white">Deaths: {deaths}</h3>
         </Col>
       </Row>
     </>

@@ -1,3 +1,4 @@
+import { ProgressBar } from "react-bootstrap"
 import Toast from "react-bootstrap/Toast"
 
 type PlayerCardProps = {
@@ -7,16 +8,23 @@ type PlayerCardProps = {
   pick: string
 }
 
-function PlayerCard(props: PlayerCardProps) {
+const PlayerCard = (props: PlayerCardProps) => {
   return (
     <Toast className="mb-3">
       <Toast.Header closeButton={false}>
-        <img src={props.img} className="rounded me-2" alt="" width={60} />
+        <img src={props.img} className="rounded me-2" alt="" width={80} />
         <strong className="me-auto">{props.name}</strong>
       </Toast.Header>
       <Toast.Body>
-        <h4>Score: {props.score}</h4>
-        <h5>Current pick: {props.pick} </h5>
+        <h4>Health: {props.score}</h4>
+        <ProgressBar
+          variant="danger"
+          animated
+          max={10}
+          now={props.score}
+          label={props.score + " / 10"}
+        />
+        <h4 className="mt-2">Current pick: {props.pick} </h4>
       </Toast.Body>
     </Toast>
   )

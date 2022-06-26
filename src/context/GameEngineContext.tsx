@@ -6,7 +6,6 @@ import {
   useEffect,
 } from "react"
 import gameChoices from "../data/choices.json"
-import useSound from "use-sound"
 import { useLocalStorage } from "../hooks/useLocalStorage"
 import { randomSfx } from "../utilities/randomSfx"
 
@@ -15,15 +14,17 @@ type GameEngineProviderProps = {
 }
 
 type GameEngineContext = {
-  playerChoice?: ChoiceProps
-  computerChoice?: ChoiceProps
   clickHandler: (choice: ChoiceProps) => void
   getGameWinner: () => string | null
+  resetGame: () => void
+  playerChoice?: ChoiceProps
+  computerChoice?: ChoiceProps
   gameResult: string | null
   isPlaying: boolean
-  playerScore: number
-  computerScore: number
+  playerHealth: number
+  computerHealth: number
   highScore: number
+  deaths: number
 }
 
 export type ChoiceProps = {
@@ -43,22 +44,24 @@ export function GameEngineProvider({ children }: GameEngineProviderProps) {
   const [computerChoice, setComputerChoice] = useState<ChoiceProps>()
   const [isPlaying, setIsPlaying] = useState(false)
   const [gameResult, setGameResult] = useState<string | null>(null)
-  const [playerScore, setPlayerScore] = useState(0)
-  const [computerScore, setComputerScore] = useState(0)
+  const [playerHealth, setPlayerHealth] = useState(5)
+  const [computerHealth, setComputerHealth] = useState(5)
   const [highScore, setHighScore] = useLocalStorage("highScore", 0)
-  const [play] = useSound(randomSfx(), {
-    volume: 0.5,
-  })
+  const [deaths, setDeaths] = useLocalStorage("deaths", 0)
 
   useEffect(() => {
     setGameResult(getGameWinner(playerChoice, computerChoice))
   }, [playerChoice, computerChoice])
 
   useEffect(() => {
-    if (playerScore > highScore) {
-      setHighScore(playerScore)
+    if (playerHealth <= 0) {
+      setDeaths(deaths + 1)
+      resetGame()
+    } else if (computerHealth <= 0) {
+      setHighScore(highScore + 1)
+      resetGame()
     }
-  }, [playerScore])
+  }, [playerHealth, computerHealth])
 
   const playerWinningPlays = [
     "ScissorsPaper",
@@ -78,16 +81,24 @@ export function GameEngineProvider({ children }: GameEngineProviderProps) {
     computerChoice?: ChoiceProps
   ) => {
     if (!playerChoice || !computerChoice) return null
-    else if (playerChoice.id === computerChoice.id) return "It's a tie!"
-    else if (
+    if (playerChoice.id === computerChoice.id) return "It's a tie!"
+    if (
       playerWinningPlays.includes(`${playerChoice.name}${computerChoice.name}`)
     ) {
-      setPlayerScore(playerScore + 1)
+      setComputerHealth(computerHealth - 1)
       return "You win!"
-    } else {
-      setComputerScore(computerScore + 1)
-      return "You lose!"
     }
+    setPlayerHealth(playerHealth - 1)
+    return "You lose!"
+  }
+
+  const resetGame = () => {
+    setPlayerChoice(undefined)
+    setComputerChoice(undefined)
+    setIsPlaying(false)
+    setGameResult(null)
+    setPlayerHealth(5)
+    setComputerHealth(5)
   }
 
   const clickHandler = (choice: ChoiceProps) => {
@@ -96,6 +107,7 @@ export function GameEngineProvider({ children }: GameEngineProviderProps) {
     setGameResult(null)
     setComputerChoice(undefined)
     setPlayerChoice({ ...choice })
+    randomSfx()
     randomChoiceGenerator()
   }
 
@@ -105,9 +117,9 @@ export function GameEngineProvider({ children }: GameEngineProviderProps) {
       gameChoices[Math.floor(Math.random() * gameChoices.length)]
     setTimeout(() => {
       setComputerChoice({ ...randomSelection })
+      randomSfx()
       setIsPlaying(false)
-      play()
-    }, 3000)
+    }, 2000)
   }
 
   return (
@@ -115,13 +127,15 @@ export function GameEngineProvider({ children }: GameEngineProviderProps) {
       value={{
         getGameWinner,
         clickHandler,
+        resetGame,
         playerChoice,
         computerChoice,
         gameResult,
         isPlaying,
-        playerScore,
-        computerScore,
+        playerHealth,
+        computerHealth,
         highScore,
+        deaths,
       }}
     >
       {children}
