@@ -1,8 +1,10 @@
 import { Button, Col, Container, Row } from "react-bootstrap"
 import { NavLink } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { motion } from "framer-motion"
 
 export function Home() {
+  const navigate = useNavigate()
   return (
     <>
       <motion.div
@@ -31,16 +33,15 @@ export function Home() {
             <p className="text-black fs-3 text-center">
               Made with love, by Elvis
             </p>
-
-            <NavLink to="/game">
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                className="btn btn-danger btn-lg mt-5"
-              >
-                Play
-              </motion.button>
-            </NavLink>
+            <motion.button
+              onClick={() => navigate("/game")}
+              type="button"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              className="btn btn-danger btn-lg"
+            >
+              Play
+            </motion.button>
           </Col>
         </Row>
       </motion.div>
