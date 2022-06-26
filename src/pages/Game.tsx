@@ -53,8 +53,10 @@ export function Game() {
       {playerChoice && (
         <>
           <motion.div
-            animate={{ y: [1000, 0] }}
-            transition={{ ease: "easeOut", duration: 0.6 }}
+            animate={{
+              scale: [1, 1.2, 1, 1],
+            }}
+            transition={{ ease: "easeInOut", duration: 1 }}
           >
             <Row xs={3} className="g-3 mt-2 align-items-start">
               <Col className="d-flex justify-content-center flex-column align-items-center">
@@ -75,7 +77,13 @@ export function Game() {
                   ></img>
                 </div>
                 {gameResult && (
-                  <div>
+                  <motion.div
+                    animate={{
+                      scale: [1, 1, 2, 2, 1, 1],
+                      rotate: [0, 180, 0, 0, 0, 0],
+                    }}
+                    transition={{ ease: "easeOut", duration: 1 }}
+                  >
                     {gameResult === "You win!" ? (
                       <img
                         src="/imgs/win.png"
@@ -91,7 +99,7 @@ export function Game() {
                     ) : (
                       <h1 className="text-white">DRAW</h1>
                     )}
-                  </div>
+                  </motion.div>
                 )}
               </Col>
               {isPlaying && (
@@ -131,6 +139,7 @@ export function Game() {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={() => resetGame()}
+                disabled={isPlaying}
                 className="btn btn-outline-danger btn-lg mb-2"
               >
                 {playerHealth <= 0 || computerHealth <= 0

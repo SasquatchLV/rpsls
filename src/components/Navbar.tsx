@@ -1,11 +1,12 @@
 import { motion } from "framer-motion"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Button, Container, Nav, Navbar as NavBarBs } from "react-bootstrap"
 import { NavLink } from "react-router-dom"
 import togglePlayAudio from "../utilities/togglePlayAudio"
 
 export function Navbar() {
   const [isPlaying, setIsPlaying] = useState(false)
+
   return (
     <motion.div
       animate={{ y: [-300, 0] }}
