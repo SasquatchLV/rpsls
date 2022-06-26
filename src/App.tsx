@@ -12,8 +12,8 @@ function App() {
         <Navbar />
         <Container className="mb-4">
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/game" element={<Game />} />
+            <Route index element={<Home />} />
+            <Route path="game" element={<Game />} />
           </Routes>
         </Container>
       </GameEngineProvider>
