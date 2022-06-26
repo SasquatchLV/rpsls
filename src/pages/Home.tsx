@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom"
 import { motion } from "framer-motion"
 
 export function Home() {
-  console.log(motion)
   return (
     <>
       <motion.div
