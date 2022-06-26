@@ -125,7 +125,6 @@ export function GameEngineProvider({ children }: GameEngineProviderProps) {
 
   const showSplash = () => {
     setTakingDamage(true)
-    console.log("splash called")
     setTimeout(() => {
       setTakingDamage(false)
     }, 2000)
