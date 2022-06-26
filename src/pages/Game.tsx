@@ -106,7 +106,9 @@ export function Game() {
               variant="outline-danger"
               className="mt-3 mb-3"
             >
-              Restart
+              {playerHealth <= 0 || computerHealth <= 0
+                ? "Play again"
+                : "Restart"}
             </Button>
           )}
           <h3 className="text-white">Your victories: {highScore}</h3>

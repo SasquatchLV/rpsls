@@ -20,9 +20,9 @@ const PlayerCard = (props: PlayerCardProps) => {
         <ProgressBar
           variant="danger"
           animated
-          max={10}
+          max={5}
           now={props.score}
-          label={props.score + " / 10"}
+          label={props.score + " / 5"}
         />
         <h4 className="mt-2">Current pick: {props.pick} </h4>
       </Toast.Body>

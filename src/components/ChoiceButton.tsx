@@ -2,7 +2,8 @@ import { Button } from "react-bootstrap"
 import { useGameEngine, ChoiceProps } from "../context/GameEngineContext"
 
 const ChoiceButton = (props: ChoiceProps) => {
-  const { clickHandler, isPlaying } = useGameEngine()
+  const { clickHandler, isPlaying, playerHealth, computerHealth } =
+    useGameEngine()
 
   return (
     <Button
@@ -10,7 +11,7 @@ const ChoiceButton = (props: ChoiceProps) => {
         clickHandler(props)
       }}
       variant="outline-danger"
-      disabled={isPlaying}
+      disabled={isPlaying || playerHealth <= 0 || computerHealth <= 0}
       style={{
         backgroundImage: `url(${props.img})`,
         backgroundSize: "cover",

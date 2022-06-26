@@ -56,10 +56,8 @@ export function GameEngineProvider({ children }: GameEngineProviderProps) {
   useEffect(() => {
     if (playerHealth <= 0) {
       setDeaths(deaths + 1)
-      resetGame()
     } else if (computerHealth <= 0) {
       setHighScore(highScore + 1)
-      resetGame()
     }
   }, [playerHealth, computerHealth])
 
