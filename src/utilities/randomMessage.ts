@@ -5,6 +5,9 @@ const pcLoadingMessages = [
   "Easy as 1,2,3",
   "Never gonna give you up, never gonna let you down",
   "Tell me mortal, can you beat this?",
+  "I'm not a mind reader, I'm a brain",
+  "It's time to kick ass and chew bubble gum…and I'm all outta gum",
+  "The only thing that can defeat power, is more power",
 ]
 
 const randomMessage = () => {

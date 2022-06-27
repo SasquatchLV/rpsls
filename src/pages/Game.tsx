@@ -1,4 +1,4 @@
-import { Button, Col, Row } from "react-bootstrap"
+import { Col, Row } from "react-bootstrap"
 import { ChoiceCard } from "../components/ChoiceCard"
 import gameChoices from "../data/choices.json"
 import Spinner from "react-bootstrap/Spinner"
@@ -34,6 +34,7 @@ export const Game = () => {
           </Col>
         </Row>
       </motion.div>
+
       <motion.div
         animate={{ y: [-1000, 0] }}
         transition={{ ease: "easeOut", duration: 0.6, delay: 0.5 }}
@@ -51,6 +52,7 @@ export const Game = () => {
           </Col>
         </Row>
       </motion.div>
+
       {takingDamage && (
         <motion.div
           className="splash"
@@ -61,6 +63,7 @@ export const Game = () => {
           transition={{ ease: "easeInOut", duration: 2 }}
         ></motion.div>
       )}
+
       {playerChoice && (
         <>
           <motion.div
