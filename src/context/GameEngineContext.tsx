@@ -40,7 +40,7 @@ export const useGameEngine = () => {
   return useContext(GameEngineContext)
 }
 
-export function GameEngineProvider({ children }: GameEngineProviderProps) {
+export const GameEngineProvider = ({ children }: GameEngineProviderProps) => {
   const [playerChoice, setPlayerChoice] = useState<ChoiceProps>()
   const [computerChoice, setComputerChoice] = useState<ChoiceProps>()
   const [isPlaying, setIsPlaying] = useState(false)

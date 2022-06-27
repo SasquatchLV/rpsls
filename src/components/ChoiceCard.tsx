@@ -1,7 +1,7 @@
-import { Button, Card, Toast } from "react-bootstrap"
+import { Toast } from "react-bootstrap"
 import { ChoiceProps } from "../context/GameEngineContext"
 
-export function ChoiceCard({ name, img }: ChoiceProps) {
+export const ChoiceCard = ({ name, img }: ChoiceProps) => {
   return (
     <>
       <Toast className="mb-3">

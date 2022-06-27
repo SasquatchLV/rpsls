@@ -8,7 +8,7 @@ import PlayerCard from "../components/PlayerCard"
 import randomMessage from "../utilities/randomMessage"
 import { motion } from "framer-motion"
 
-export function Game() {
+export const Game = () => {
   const {
     playerChoice,
     computerChoice,

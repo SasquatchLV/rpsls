@@ -1,9 +1,8 @@
-import { Button, Col, Container, Row } from "react-bootstrap"
-import { NavLink } from "react-router-dom"
+import { Col, Row } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
 import { motion } from "framer-motion"
 
-export function Home() {
+export const Home = () => {
   const navigate = useNavigate()
   return (
     <>

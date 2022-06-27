@@ -5,7 +5,7 @@ import { Game } from "./pages/Game"
 import { Navbar } from "./components/Navbar"
 import { GameEngineProvider } from "./context/GameEngineContext"
 
-function App() {
+const App = () => {
   return (
     <>
       <GameEngineProvider>
