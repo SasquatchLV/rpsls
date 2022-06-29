@@ -80,7 +80,10 @@ export const GameEngineProvider = ({ children }: GameEngineProviderProps) => {
     playerChoice?: ChoiceProps,
     computerChoice?: ChoiceProps
   ) => {
-    if (!playerChoice || !computerChoice) return null
+    if (!playerChoice || !computerChoice) {
+      return null
+    }
+
     if (playerChoice.id === computerChoice.id) return "It's a tie!"
     if (
       playerWinningPlays.includes(`${playerChoice.name}${computerChoice.name}`)
@@ -114,8 +117,10 @@ export const GameEngineProvider = ({ children }: GameEngineProviderProps) => {
 
   const randomChoiceGenerator = () => {
     setIsPlaying(true)
+
     const randomSelection =
       gameChoices[Math.floor(Math.random() * gameChoices.length)]
+
     setTimeout(() => {
       setComputerChoice({ ...randomSelection })
       randomSfx()
